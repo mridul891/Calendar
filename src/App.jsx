@@ -2,7 +2,7 @@ import Calendar from "./Components/Calendar";
 
 function App() {
   return (
-    <div className="flex w-[50%] h-[50%]">
+    <div className="flex justify-center items-center  h-screen bg-black text-white">
       <Calendar />
     </div>
   );
