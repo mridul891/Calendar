@@ -5,7 +5,7 @@ const Header = ({ prevMonth, nextMonth, currentDate }) => {
         {" "}
         &lt;
       </button>
-      <span className="font-bold text-3xl mb uppercase">
+      <span className="font-bold text-3xl  uppercase">
         {currentDate.toLocaleString("default", { month: "long" }).slice(0, 3)}
         <span className="ml-2 text-zinc-600 ">{currentDate.getFullYear()}</span>
       </span>
