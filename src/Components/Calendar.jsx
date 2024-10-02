@@ -42,7 +42,7 @@ const Calendar = () => {
         <button onClick={nextMonth}> &gt;</button>
       </div>
 
-      <div className="grid grid-cols-7 w-full gap-5">
+      <div className="grid grid-cols-7 w-full lg:gap-5 gap-2">
         {dayNames.map((day, index) => (
           <div
             key={index}
@@ -60,14 +60,13 @@ const Calendar = () => {
         {daysinMonth.map((day) => (
           <div
             key={day}
-            className={`inline-flex font-semibold justify-center text-white items-end h-[4rem] rounded-xl  
+            className={`inline-flex font-semibold justify-center text-white items-end h-[2.5rem] md:h-[4rem] rounded-xl  
               ${
                 day.getDate() === currentDate.getDate() &&
                 day.getMonth() === todayMonth
                   ? "bg-white text-black "
                   : "bg-zinc-900"
               }`}
-            onClick={handleCLick}
           >
             {day.getDate() < 10 ? "0" + day.getDate() : day.getDate()}
           </div>
