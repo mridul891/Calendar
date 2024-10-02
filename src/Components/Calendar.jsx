@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
+import Header from "./Header";
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [daysinMonth, setDaysinMonths] = useState([]);
@@ -11,7 +12,7 @@ const Calendar = () => {
     const month = currentDate.getMonth();
     const date = new Date(year, month, 1);
     const days = [];
-
+    setDaysinMonths(days);
     while (date.getMonth() === month) {
       days.push(new Date(date));
       date.setDate(date.getDate() + 1);
@@ -31,16 +32,11 @@ const Calendar = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-5 ">
-      <div className="flex gap-10 w-[60%] justify-around">
-        <button onClick={prevMonth}> &lt;</button>
-        <span className="font-bold text-3xl mb uppercase">
-          {currentDate.toLocaleString("default", { month: "long" }).slice(0, 3)}
-          <span className="ml-2 text-zinc-600 ">
-            {currentDate.getFullYear()}
-          </span>
-        </span>
-        <button onClick={nextMonth}> &gt;</button>
-      </div>
+      <Header
+        prevMonth={prevMonth}
+        nextMonth={nextMonth}
+        currentDate={currentDate}
+      />
 
       <div className="grid grid-cols-7 w-full lg:gap-5 gap-2">
         {dayNames.map((day, index) => (
@@ -55,21 +51,34 @@ const Calendar = () => {
 
       <div className="grid grid-cols-7 w-full gap-5  ">
         {Array.from({ length: startDay }).map((_, index) => (
-          <div key={index} className="bg-zinc-800 rounded-xl"></div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0, duration: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            key={index}
+            className="bg-zinc-800 rounded-xl"
+          ></motion.div>
         ))}
         {daysinMonth.map((day) => (
-          <div
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            whileHover={{ scale: 1.4 }}
+            whileTap={{ scale: 0.9 }}
             key={day}
             className={`inline-flex font-semibold justify-center text-white items-end h-[2.5rem] md:h-[4rem] rounded-xl  
               ${
                 day.getDate() === currentDate.getDate() &&
                 day.getMonth() === todayMonth
-                  ? "bg-white text-black "
+                  ? "bg-white text-black"
                   : "bg-zinc-900"
               }`}
           >
             {day.getDate() < 10 ? "0" + day.getDate() : day.getDate()}
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
