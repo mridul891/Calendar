@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Header from "./Header";
+import { Information } from "./Information";
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [daysinMonth, setDaysinMonths] = useState([]);
@@ -90,9 +91,7 @@ const Calendar = () => {
           >
             <div className="flex justify-around items-center h-full ">
               {day.getDate() < 10 ? "0" + day.getDate() : day.getDate()}
-              <button onClick={handleClick} className="absolute top-0 right-0">
-                +
-              </button>
+              <Information />
             </div>
           </motion.div>
         ))}
