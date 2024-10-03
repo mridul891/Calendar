@@ -5,6 +5,7 @@ const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [daysinMonth, setDaysinMonths] = useState([]);
   const [startDay, setStartDay] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
   const todayMonth = new Date().getMonth();
 
   useEffect(() => {
@@ -28,6 +29,15 @@ const Calendar = () => {
   };
   const nextMonth = () => {
     setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)));
+  };
+
+  const handleSelect = (day) => {
+    console.log(day);
+    setSelectedDate(day);
+  };
+
+  const handleClick = () => {
+    console.log("button clicked");
   };
 
   return (
@@ -66,18 +76,24 @@ const Calendar = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            whileHover={{ scale: 1.4 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             key={day}
-            className={`inline-flex font-semibold justify-center text-white items-end h-[2.5rem] md:h-[4rem] rounded-xl  
+            className={`flex-1 w-full font-semibold  text-white items-end h-[2.5rem] md:h-[4rem] rounded-xl  
               ${
                 day.getDate() === currentDate.getDate() &&
                 day.getMonth() === todayMonth
-                  ? "bg-white text-black"
+                  ? "bg-zinc-600 text-black "
                   : "bg-zinc-900"
               }`}
+            onClick={() => handleSelect(day)}
           >
-            {day.getDate() < 10 ? "0" + day.getDate() : day.getDate()}
+            <div className="flex justify-around items-center h-full ">
+              {day.getDate() < 10 ? "0" + day.getDate() : day.getDate()}
+              <button onClick={handleClick} className="absolute top-0 right-0">
+                +
+              </button>
+            </div>
           </motion.div>
         ))}
       </div>
